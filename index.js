@@ -2,7 +2,7 @@
  * @Author: liu.jiahuan 
  * @Date: 2018-04-02 13:44:59 
  * @Last Modified by: liu.jiahuan
- * @Last Modified time: 2018-04-02 18:01:31
+ * @Last Modified time: 2018-04-02 18:16:06
  */
 
 var express = require('express');
@@ -10,6 +10,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path')
+var moment = require('moment')
 
 var clientIp = null;
 
@@ -36,7 +37,7 @@ var chat = io
       // socket.emit('chat message', msg);
       
       var address = socket.handshake.address
-      var time = socket.handshake.time
+      var time = moment(socket.handshake.time).format('YYYY-MM-DD HH:mm:ss')
       chat.emit('chat message', {
         msg,
         address,
